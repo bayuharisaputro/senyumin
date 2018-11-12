@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "76473472663",
+    "firebase_url": "https://senyumin-68f27.firebaseio.com",
+    "project_id": "senyumin-68f27",
+    "storage_bucket": "senyumin-68f27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76473472663:android:c43a1562ec54d43a",
+        "android_client_info": {
+          "package_name": "com.example.bayuharisaputro.senyumin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76473472663-okfovekvi86762u8pq0p17t8t8l7vqkl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bayuharisaputro.senyumin",
+            "certificate_hash": "9e89c24de889cda3fba1830d81550f8fab4143dd"
+          }
+        },
+        {
+          "client_id": "76473472663-0035h8c3qvb63knag7av7rk2gnj5fa35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYyN-w4A-c_5qOfWOUh6IPGhxmoMDOC7M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76473472663-0035h8c3qvb63knag7av7rk2gnj5fa35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
