@@ -1,5 +1,8 @@
-package com.example.bayuharisaputro.senyumin;
+package com.example.bayuharisaputro.senyumin.Activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bayuharisaputro.senyumin.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -22,10 +26,18 @@ import java.util.concurrent.TimeUnit;
 public class LoginActivity extends AppCompatActivity {
     EditText InputNomorTelp, InputKode;
     Button kirimKode, login;
-    String kodeTerkirim;
+    String kodeTerkirim,kode,nomor;
     FirebaseAuth firebaseAuth;
+    SharedPreferences sharedpreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = this.getSharedPreferences("pref", Context.MODE_PRIVATE);
+        String nomor = preferences.getString("noHp","kosong");
+        if(!"kosong".equals(nomor)) {
+            Intent myIntent = new Intent(LoginActivity.this, ProfileActivity.class);
+            startActivity(myIntent);
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         InputNomorTelp = findViewById(R.id.phoneNumber);
@@ -78,8 +90,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void verifikasiKode(){
-        String kode = InputKode.getText().toString();
+        kode = InputKode.getText().toString();
+        nomor = InputNomorTelp.getText().toString();
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(kodeTerkirim, kode);
+        SharedPreferences.Editor editor = getSharedPreferences("pref", MODE_PRIVATE).edit();
+        editor.putString("noHp", nomor);
+        editor.commit();
         Login(credential);
     }
 
@@ -89,8 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Login Berhasil", Toast.LENGTH_LONG).show();
+                            Intent myIntent = new Intent(LoginActivity.this, ProfileActivity.class);
+                            myIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            startActivity(myIntent);
+                            finish();
+
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 Toast.makeText(getApplicationContext(),
