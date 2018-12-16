@@ -8,6 +8,7 @@
     android:paddingLeft="18dp"
     android:paddingRight="18dp"
     android:paddingTop="16dp"
+    android:id="@+id/postActivity"
     tools:context=".Activity.PostActivity"
     android:orientation="vertical"
     android:weightSum="2">
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/judul"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="57dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="simpan"
                 android:textColor="#fff" />
@@ -54,8 +55,18 @@
                 android:layout_below="@+id/gambar"
                 android:layout_alignParentStart="true"
                 android:ems="10"
-                android:hint="judul"
+                android:hint="Judul"
                 android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/tanggal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/judul"
+                android:layout_alignParentStart="true"
+                android:ems="10"
+                android:hint="Tanggal"
+                android:inputType="date" />
 
 
         </RelativeLayout>
