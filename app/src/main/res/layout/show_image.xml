@@ -18,12 +18,12 @@
             android:layout_marginTop="8dp"
             android:text="Judul"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/image_view_upload"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="318dp" />
         <TextView
             android:id="@+id/tanggal"
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:text="tanggal"
             android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 

@@ -13,12 +13,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.bayuharisaputro.senyumin.Model.Post;
 import com.example.bayuharisaputro.senyumin.Model.User;
@@ -49,7 +52,8 @@ public class PostActivity extends AppCompatActivity {
     Uri selectedImageURI;
     ProgressDialog mprogress;
     DatabaseReference databaseUser;
-     StorageTask mUploadTask;
+    StorageTask mUploadTask;
+    android.support.v7.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +64,10 @@ public class PostActivity extends AppCompatActivity {
         judul = findViewById(R.id.judul);
         tanggal = findViewById(R.id.tanggal);
         simpan = findViewById(R.id.simpanPost);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         SharedPreferences preferences = this.getSharedPreferences("pref", Context.MODE_PRIVATE);
-       fnomor = preferences.getString("noHp","kosong");
+        fnomor = preferences.getString("noHp","kosong");
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c);
@@ -151,5 +157,30 @@ public class PostActivity extends AppCompatActivity {
         }
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.back:
+                Intent myIntent = new Intent(PostActivity.this, MainActivity.class);
+                startActivity(myIntent);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+    }
     }
 

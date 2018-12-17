@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity implements Main.OnFragmentIn
             case R.id.post:
                 Intent myIntent = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(myIntent);
+                finish();
+
+            case R.id.logout:
+                SharedPreferences.Editor editor = getSharedPreferences("pref", MODE_PRIVATE).edit();
+                editor.clear().apply();
+
 //                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.mainActivity),
 //                        "POST", Snackbar.LENGTH_SHORT);
 //                mySnackbar.show();

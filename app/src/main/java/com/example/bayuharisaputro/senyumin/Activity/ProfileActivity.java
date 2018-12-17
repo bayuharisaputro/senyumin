@@ -39,8 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         DatabaseReference root = FirebaseDatabase.getInstance().getReference();
-        ref = root.child(user.getUid()).orderByChild("nomor").equalTo(fnomor);
-
+        ref = root.child("User").child("LTlWYvzFYThsmwbTtRK");
         setContentView(R.layout.activity_profile);
         hello = findViewById(R.id.hello);
         bSimpan = findViewById(R.id.simpan);
@@ -52,17 +51,20 @@ public class ProfileActivity extends AppCompatActivity {
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot != null) {
+                            String value = dataSnapshot.getValue(String.class);
+//                            hello.setText(value);
+//
+//                        if (dataSnapshot.exists()) {
                             Intent myIntent = new Intent(ProfileActivity.this, MainActivity.class);
                             startActivity(myIntent);
                             finish();
-                        }
-                        else {
-                            InputNamaActivity fm2 = new InputNamaActivity();
-                            hello.setVisibility(View.GONE);
-                            bLanjut.setVisibility(View.GONE);
-                            gantiFrag(fm2);
-                        }
+//                        }
+//                        else {
+//                            InputNamaActivity fm2 = new InputNamaActivity();
+//                            hello.setVisibility(View.GONE);
+//                            bLanjut.setVisibility(View.GONE);
+//                            gantiFrag(fm2);
+//                        }
 
                     }
 
@@ -84,6 +86,8 @@ public class ProfileActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+
 
 
 }
