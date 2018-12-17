@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".Activity.ProfileActivity" />
         <activity android:name=".Activity.PostActivity" />
+        <activity android:name=".Activity.VerifyPhoneActivity" />
         <activity
             android:name=".Activity.MainActivity"
             android:label="@string/title_activity_main" />

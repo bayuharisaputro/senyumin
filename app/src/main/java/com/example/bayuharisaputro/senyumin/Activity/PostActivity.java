@@ -28,6 +28,7 @@ import com.example.bayuharisaputro.senyumin.Model.User;
 import com.example.bayuharisaputro.senyumin.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -66,8 +67,7 @@ public class PostActivity extends AppCompatActivity {
         simpan = findViewById(R.id.simpanPost);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        SharedPreferences preferences = this.getSharedPreferences("pref", Context.MODE_PRIVATE);
-        fnomor = preferences.getString("noHp","kosong");
+        fnomor = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String formattedDate = df.format(c);

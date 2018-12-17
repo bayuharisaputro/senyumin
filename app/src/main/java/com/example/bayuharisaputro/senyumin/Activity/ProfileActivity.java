@@ -44,35 +44,17 @@ public class ProfileActivity extends AppCompatActivity {
         hello = findViewById(R.id.hello);
         bSimpan = findViewById(R.id.simpan);
         bLanjut = findViewById(R.id.lanjut);
-
+        if (auth.getCurrentUser() != null)
+           hello.setText(auth.getCurrentUser().getUid());
         bLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String value = dataSnapshot.getValue(String.class);
-//                            hello.setText(value);
-//
-//                        if (dataSnapshot.exists()) {
-                            Intent myIntent = new Intent(ProfileActivity.this, MainActivity.class);
-                            startActivity(myIntent);
-                            finish();
-//                        }
-//                        else {
-//                            InputNamaActivity fm2 = new InputNamaActivity();
-//                            hello.setVisibility(View.GONE);
-//                            bLanjut.setVisibility(View.GONE);
-//                            gantiFrag(fm2);
-//                        }
+                FirebaseAuth.getInstance().signOut();
 
-                    }
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                startActivity(intent);
 
 
             }

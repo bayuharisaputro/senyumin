@@ -29,6 +29,7 @@ import com.example.bayuharisaputro.senyumin.Adapter.PagerAdapter;
 import com.example.bayuharisaputro.senyumin.Fragment.Hot;
 import com.example.bayuharisaputro.senyumin.Fragment.Main;
 import com.example.bayuharisaputro.senyumin.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements Main.OnFragmentInteractionListener,Hot.OnFragmentInteractionListener{
 
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements Main.OnFragmentIn
         setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Post"));
+        tabLayout.addTab(tabLayout.newTab().setText("Post Kamu"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,9 +85,11 @@ public class MainActivity extends AppCompatActivity implements Main.OnFragmentIn
                 startActivity(myIntent);
                 finish();
 
-            case R.id.logout:
-                SharedPreferences.Editor editor = getSharedPreferences("pref", MODE_PRIVATE).edit();
-                editor.clear().apply();
+//            case R.id.logout:
+//                FirebaseAuth.getInstance().signOut();
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
 
 //                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.mainActivity),
 //                        "POST", Snackbar.LENGTH_SHORT);

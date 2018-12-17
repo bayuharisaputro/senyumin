@@ -20,13 +20,16 @@ import com.example.bayuharisaputro.senyumin.Activity.PostActivity;
 import com.example.bayuharisaputro.senyumin.Adapter.RecyclerAdapter;
 import com.example.bayuharisaputro.senyumin.Model.Post;
 import com.example.bayuharisaputro.senyumin.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -36,9 +39,11 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
     RecyclerAdapter mAdapter;
     ProgressBar mProgress;
     DatabaseReference ref;
-    List<Post> mPost;
+    Query query;
+    List<Post> mPost,mPostId;
     Hot.OnFragmentInteractionListener mListener;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    String nomor = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
     public Main() {
         // Required empty public constructor
     }
@@ -55,8 +60,9 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
         mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mPost = new ArrayList<>();
-
+        mPostId = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("Post");
+        query = ref.orderByChild("tanggal");
         //mProgress.setVisibility(View.VISIBLE);
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
@@ -90,14 +96,14 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
 
     @Override
     public void onRefresh() {
-        mPost.clear();
+        mPostId.clear();
         loadData();
     }
 
 
     void loadData() {
         mSwipeRefreshLayout.setRefreshing(true);
-        ref.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -107,9 +113,9 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
 
                 }
 
+                Collections.reverse(mPost);
                 mAdapter = new RecyclerAdapter(getActivity(), mPost);
                 mAdapter.notifyDataSetChanged();
-
                 mSwipeRefreshLayout.setRefreshing(false);
                 mRecyclerView.setAdapter(mAdapter);
 
