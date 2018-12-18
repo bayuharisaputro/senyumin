@@ -46,6 +46,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="195dp"
-        android:text="Simpan" />
+        android:background="@color/colorPrimary"
+        android:text="Simpan"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>
