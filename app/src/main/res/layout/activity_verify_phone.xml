@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/smiling"
     tools:context=".Activity.VerifyPhoneActivity">
 
     <RelativeLayout
@@ -13,11 +14,13 @@
         android:background="#FFFFFF">
 
         <ImageView
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="120dp"
+            android:background="@drawable/senyumin"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-        />
+            android:layout_centerVertical="true">
+
+        </ImageView>
 
     </RelativeLayout>
 

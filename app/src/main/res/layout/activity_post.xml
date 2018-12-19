@@ -50,8 +50,9 @@
                 android:layout_below="@+id/judul"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="57dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="simpan"
+                android:background="@color/colorPrimary"
+                android:text="Simpan"
+                android:textAllCaps="false"
                 android:textColor="#fff" />
 
             <EditText
@@ -62,7 +63,8 @@
                 android:layout_alignParentStart="true"
                 android:ems="10"
                 android:hint="Judul"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:layout_alignParentLeft="true" />
 
             <EditText
                 android:id="@+id/tanggal"
@@ -72,7 +74,8 @@
                 android:layout_alignParentStart="true"
                 android:ems="10"
                 android:hint="Tanggal"
-                android:inputType="date" />
+                android:inputType="date"
+                android:layout_alignParentLeft="true" />
 
 
         </RelativeLayout>
