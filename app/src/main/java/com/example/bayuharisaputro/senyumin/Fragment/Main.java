@@ -119,19 +119,19 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
 
         LikeStat = 0;
        mSwipeRefreshLayout.setRefreshing(true);
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mPost.clear();
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Post upload = postSnapshot.getValue(Post.class);
 //                    if(LikeStat == 0 ) {
                         mPost.add(upload);
-//                    }
+//                   }
 
                 }
 
-                query2.addValueEventListener(new ValueEventListener() {
+                query2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -140,11 +140,7 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
 
                         }
 
-
-
-
                         mAdapter = new RecyclerAdapter(getActivity(), mPost);
-                        mAdapter.notifyDataSetChanged();
                         mSwipeRefreshLayout.setRefreshing(false);
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.setOnItemClickListener(new RecyclerClick() {
@@ -178,7 +174,7 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
                                     update.child(mPost.get(position).getId()).updateChildren(result);
 
                                      mPost.get(position).setLike(Integer.toString(like));
-                                     LikeStat = 1;
+                                     mAdapter.notifyDataSetChanged();
 
 
                                 }else {
