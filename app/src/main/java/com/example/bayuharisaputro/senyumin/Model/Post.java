@@ -6,18 +6,27 @@ public class Post {
     String tanggal;
     String namaPost;
     String like;
+    String id;
     int dislike;
     int report;
 
-
-    public Post(String nomor, String judul, String tanggal, String namaPost, String like, int dislike, int report) {
+    public Post(String nomor, String judul, String tanggal, String namaPost, String like, String id, int dislike, int report) {
         this.nomor = nomor;
         this.judul = judul;
         this.tanggal = tanggal;
         this.namaPost = namaPost;
         this.like = like;
+        this.id = id;
         this.dislike = dislike;
         this.report = report;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Post() {

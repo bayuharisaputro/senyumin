@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 String number = editText.getText().toString().trim();
 
-                if (number.isEmpty() || number.length() < 8) {
+                if (number.isEmpty() || number.length() < 6) {
                     editText.setError("Valid number is required");
                     editText.requestFocus();
                     return;

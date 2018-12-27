@@ -40,14 +40,16 @@ import java.util.List;
 
 
 public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-
+    int jumlah = 0;
     RecyclerView mRecyclerView;
     RecyclerAdapter mAdapter;
     DatabaseReference ref, ref2,update;
     Query query,query2;
+    int LikeStat = 0;
     DatabaseReference databaselike;
     List<Post> mPost;
     List<Like> mLike;
+    List<Like> mLike2;
     boolean check = true;
 
     Hot.OnFragmentInteractionListener mListener;
@@ -71,7 +73,6 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
         mPost = new ArrayList<>();
         mLike = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("Post");
-        query = ref.orderByChild("tanggal");
         ref2 = FirebaseDatabase.getInstance().getReference("Like");
         update = FirebaseDatabase.getInstance().getReference("Post");
         query2 = ref2.orderByChild("id");
@@ -82,9 +83,9 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                loadData();
                 mSwipeRefreshLayout.setRefreshing(true);
-                //loadData();
+                loadData();
+
             }
         });
         return rootView;
@@ -116,102 +117,90 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
 
     void loadData() {
 
-       // mSwipeRefreshLayout.setRefreshing(true);
-        query.addValueEventListener(new ValueEventListener() {
+        LikeStat = 0;
+       mSwipeRefreshLayout.setRefreshing(true);
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mPost.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Post upload = postSnapshot.getValue(Post.class);
-                    mPost.add(upload);
-
+//                    if(LikeStat == 0 ) {
+                        mPost.add(upload);
+//                    }
 
                 }
 
                 query2.addValueEventListener(new ValueEventListener() {
                     @Override
-                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                               for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                   Like uLike = postSnapshot.getValue(Like.class);
-                                   mLike.add(uLike);
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Like uLike = postSnapshot.getValue(Like.class);
+                            mLike.add(uLike);
 
-                               }
-
-                           }
-
-                           @Override
-                           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                           }
-                       });
-
-                     //Collections.reverse(mPost);
-//                for (int j = 0; j < mPost.size(); j++) {
-//                    for (int i = 0; i < mLike.size(); i++) {
-//                        if (mLike.get(i).getIdPost().equals(mPost.get(j).getNamaPost()) ) {
-//                            mPost.get(j).setLike(10);
-//
-//                        }
-//                    }
-//                }
-                     mAdapter = new RecyclerAdapter(getActivity(), mPost);
-                     mAdapter.notifyDataSetChanged();
-                     mSwipeRefreshLayout.setRefreshing(false);
-                     mRecyclerView.setAdapter(mAdapter);
-                     mAdapter.setOnItemClickListener(new RecyclerClick() {
-                    @Override
-                    public void onPositionClicked(int position) {
-                        Toast.makeText(getContext(),
-                                mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
-                    }
-//
-                    @Override
-                    public void onLikeClicked(final int position) {
-
-                       query2.addValueEventListener(new ValueEventListener() {
-                           @Override
-                           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                               for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                   Like uLike = postSnapshot.getValue(Like.class);
-                                   mLike.add(uLike);
-
-                               }
-
-                               for (int i = 0; i < mLike.size(); i++) {
-                                   if (mLike.get(i).getIdPost().equals(mPost.get(position).getNamaPost()) &&
-                                           mLike.get(i).getNomorUser().equals(nomor)) {
-                                       check = false;
-                                       mAdapter.notifyDataSetChanged();
-
-                                   }
-                               }
-
-
-                           }
-
-                           @Override
-                           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                           }
-                       });
-                        if(check) {
-                            addLike(mPost.get(position).getNamaPost(),nomor);
-                            Toast.makeText(getContext(),
-                                    "kamu like " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
-
-                            HashMap<String, Object> result = new HashMap<>();
-                            int like = Integer.parseInt(mPost.get(position).getLike());
-                            like++;
-                            result.put("like", Integer.toString(like));
-                            update.child("-LUjer_UQa5_5ZDGHCe_").updateChildren(result);
-                            mPost.get(position).setLike(Integer.toString(like));
-                            mAdapter.notifyDataSetChanged();
-
-                        }else {
-                            Toast.makeText(getContext(),
-                                    "kamu sudah like untuk " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
                         }
+
+
+
+
+                        mAdapter = new RecyclerAdapter(getActivity(), mPost);
+                        mAdapter.notifyDataSetChanged();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setOnItemClickListener(new RecyclerClick() {
+                            @Override
+                            public void onPositionClicked(int position) {
+                                Toast.makeText(getContext(),
+                                        mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
+                            }
+                            //
+                            @Override
+                            public void onLikeClicked(final int position) {
+
+                                    for (int i = 0; i < mLike.size(); i++) {
+                                        if (mLike.get(i).getIdPost().equals(mPost.get(position).getNamaPost()) &&
+                                                mLike.get(i).getNomorUser().equals(nomor)) {
+                                            check = false;
+
+                                        }
+                                    }
+
+
+                                if(check) {
+                                    addLike(mPost.get(position).getNamaPost(),nomor);
+                                    Toast.makeText(getContext(),
+                                            "kamu like " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
+
+                                    HashMap<String, Object> result = new HashMap<>();
+                                    int like = Integer.parseInt(mPost.get(position).getLike());
+                                    like++;
+                                    result.put("like", Integer.toString(like));
+                                    update.child(mPost.get(position).getId()).updateChildren(result);
+
+                                     mPost.get(position).setLike(Integer.toString(like));
+                                     LikeStat = 1;
+
+
+                                }else {
+                                    Toast.makeText(getContext(),
+                                            "kamu sudah like untuk " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
+
+
+
+
+
 
             }
 

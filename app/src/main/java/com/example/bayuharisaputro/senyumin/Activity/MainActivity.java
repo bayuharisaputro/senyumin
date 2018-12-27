@@ -84,16 +84,17 @@ public class MainActivity extends AppCompatActivity implements Main.OnFragmentIn
                 Intent myIntent = new Intent(MainActivity.this, PostActivity.class);
                 startActivity(myIntent);
                 finish();
+                break;
 
-//            case R.id.logout:
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
-//                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.mainActivity),
-//                        "POST", Snackbar.LENGTH_SHORT);
-//                mySnackbar.show();
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.mainActivity),
+                        "POST", Snackbar.LENGTH_SHORT);
+                mySnackbar.show();
 
             break;
         }

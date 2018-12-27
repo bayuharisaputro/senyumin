@@ -129,8 +129,9 @@ public class PostActivity extends AppCompatActivity {
                                     mySnackbar.show();
                                     mprogress.dismiss();
                                     String uNamapost =uri.toString();
-                                    Post post = new Post(fnomor,uJudul,uTanggal,uNamapost,uLike, uDislike, uReport);
+
                                     String id = databaseUser.push().getKey();
+                                    Post post = new Post(fnomor,uJudul,uTanggal,uNamapost,uLike,id, uDislike, uReport);
                                     databaseUser.child(id).setValue(post);
                                 }
                             });
