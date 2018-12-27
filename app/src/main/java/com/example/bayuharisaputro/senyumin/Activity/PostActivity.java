@@ -88,7 +88,7 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View v) {
                 sJudul = judul.getText().toString();
                 sTanggal = tanggal.getText().toString();
-                addPost(sJudul,sTanggal,0,0,0);
+                addPost(sJudul,sTanggal,"0",0,0);
 
             }
         });
@@ -115,7 +115,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
 
-    private void addPost(final String uJudul, final String uTanggal, final int uLike, final int uDislike, final int uReport ) {
+    private void addPost(final String uJudul, final String uTanggal, final String uLike, final int uDislike, final int uReport ) {
         if(!TextUtils.isEmpty(uJudul) && selectedImageURI!=null) {
             final StorageReference fileReference = mStorage.child(selectedImageURI.getLastPathSegment()+ "." + getFileExtension(selectedImageURI));
             mUploadTask = fileReference.putFile(selectedImageURI)
