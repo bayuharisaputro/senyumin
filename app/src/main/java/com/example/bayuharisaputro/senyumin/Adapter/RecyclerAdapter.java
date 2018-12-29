@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.nama.setText(uploadCurrent.getNomor());
         holder.jumlahLike.setText(uploadCurrent.getLike());
         holder.tanggal.setText(uploadCurrent.getTanggal());
-        Picasso.get().load(uploadCurrent.getNamaPost()).placeholder(R.mipmap.ic_placeholder).fit().into(holder.imageView);
+        Picasso.get().load(uploadCurrent.getNamaPost()).placeholder(R.mipmap.ic_placeholder).into(holder.imageView);
 
 
     }

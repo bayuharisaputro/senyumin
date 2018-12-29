@@ -115,7 +115,7 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
 
                     }
                 }
-                Collections.reverse(mPost);
+                Collections.reverse(mPostId);
                 mAdapter = new RecyclerAdapter(getActivity(), mPostId);
                 mAdapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);

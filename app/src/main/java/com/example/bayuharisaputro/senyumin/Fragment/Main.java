@@ -1,12 +1,14 @@
 package com.example.bayuharisaputro.senyumin.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DecorToolbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.bayuharisaputro.senyumin.Activity.DetailActivity;
+import com.example.bayuharisaputro.senyumin.Activity.MainActivity;
+import com.example.bayuharisaputro.senyumin.Activity.PostActivity;
 import com.example.bayuharisaputro.senyumin.Adapter.RecyclerAdapter;
 import com.example.bayuharisaputro.senyumin.Interface.RecyclerClick;
 import com.example.bayuharisaputro.senyumin.Model.Like;
@@ -49,7 +54,6 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
     DatabaseReference databaselike;
     List<Post> mPost;
     List<Like> mLike;
-    List<Like> mLike2;
     boolean check = true;
 
     Hot.OnFragmentInteractionListener mListener;
@@ -146,10 +150,15 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
                         mAdapter.setOnItemClickListener(new RecyclerClick() {
                             @Override
                             public void onPositionClicked(int position) {
-                                Toast.makeText(getContext(),
-                                        mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
+                                Intent myIntent = new Intent(getActivity(), DetailActivity.class);
+                                myIntent.putExtra("nomor", mPost.get(position).getNomor());
+                                myIntent.putExtra("judul", mPost.get(position).getJudul());
+                                myIntent.putExtra("tanggal", mPost.get(position).getTanggal());
+                                myIntent.putExtra("gambar", mPost.get(position).getNamaPost());
+                                myIntent.putExtra("jumlahlike", mPost.get(position).getLike());
+                                myIntent.putExtra("id", mPost.get(position).getId());
+                                startActivity(myIntent);
                             }
-                            //
                             @Override
                             public void onLikeClicked(final int position) {
 

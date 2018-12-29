@@ -36,7 +36,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="13sp" />
         <TextView
-            android:id="@+id/judul"
+            android:id="@+id/komentar"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,37 +46,10 @@
             android:layout_below="@+id/tanggal"
             android:text="Judul"
             android:textColor="@android:color/black"
-            android:textSize="30sp" />
+            android:textSize="15sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/image_view_upload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_black_24dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/jumlahLike"
-                android:text="jumlah like"
-                android:textSize="12dp"
-                android:textStyle="bold"
-                android:layout_marginTop="12dp"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 

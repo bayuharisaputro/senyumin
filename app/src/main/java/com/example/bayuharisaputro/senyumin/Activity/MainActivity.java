@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements Main.OnFragmentIn
         setContentView(R.layout.activity_main);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Post"));
-        tabLayout.addTab(tabLayout.newTab().setText("Post Kamu"));
+        tabLayout.addTab(tabLayout.newTab().setText("Fresh"));
+        tabLayout.addTab(tabLayout.newTab().setText("Hot"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
