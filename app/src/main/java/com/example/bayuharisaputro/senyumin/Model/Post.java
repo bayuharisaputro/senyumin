@@ -5,12 +5,12 @@ public class Post {
     String judul;
     String tanggal;
     String namaPost;
-    String like;
+    int like;
     String id;
     int dislike;
     int report;
 
-    public Post(String nomor, String judul, String tanggal, String namaPost, String like, String id, int dislike, int report) {
+    public Post(String nomor, String judul, String tanggal, String namaPost, int like, String id, int dislike, int report) {
         this.nomor = nomor;
         this.judul = judul;
         this.tanggal = tanggal;
@@ -64,11 +64,11 @@ public class Post {
         this.tanggal = tanggal;
     }
 
-    public String getLike() {
+    public int getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         this.like = like;
     }
 

@@ -76,6 +76,17 @@
                 android:layout_marginTop="12dp"
                 />
 
+            <TextView
+                android:layout_marginLeft="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentar"
+                android:text="Lihat Komentar"
+                android:textSize="12dp"
+                android:textStyle="bold|italic"
+                android:layout_marginTop="12dp"
+                />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -41,7 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.judul.setText(uploadCurrent.getJudul());
         holder.tanggal.setText(uploadCurrent.getTanggal());
         holder.nama.setText(uploadCurrent.getNomor());
-        holder.jumlahLike.setText(uploadCurrent.getLike());
+        holder.jumlahLike.setText(Integer.toString(uploadCurrent.getLike()));
         holder.tanggal.setText(uploadCurrent.getTanggal());
         Picasso.get().load(uploadCurrent.getNamaPost()).placeholder(R.mipmap.ic_placeholder).into(holder.imageView);
 

@@ -55,7 +55,7 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
     List<Post> mPost;
     List<Like> mLike;
     boolean check = true;
-
+    String idlike;
     Hot.OnFragmentInteractionListener mListener;
     SwipeRefreshLayout mSwipeRefreshLayout;
     String nomor = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
@@ -143,7 +143,7 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
                             mLike.add(uLike);
 
                         }
-
+                        Collections.reverse(mPost);
                         mAdapter = new RecyclerAdapter(getActivity(), mPost);
                         mSwipeRefreshLayout.setRefreshing(false);
                         mRecyclerView.setAdapter(mAdapter);
@@ -166,8 +166,11 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
                                         if (mLike.get(i).getIdPost().equals(mPost.get(position).getNamaPost()) &&
                                                 mLike.get(i).getNomorUser().equals(nomor)) {
                                             check = false;
-
+                                            idlike= mLike.get(i).getId();
+                                        }else {
+                                            check = true;
                                         }
+
                                     }
 
 
@@ -177,18 +180,31 @@ public class Main extends Fragment implements SwipeRefreshLayout.OnRefreshListen
                                             "kamu like " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
 
                                     HashMap<String, Object> result = new HashMap<>();
-                                    int like = Integer.parseInt(mPost.get(position).getLike());
+                                    int like = mPost.get(position).getLike();
                                     like++;
-                                    result.put("like", Integer.toString(like));
+                                    result.put("like", (like));
                                     update.child(mPost.get(position).getId()).updateChildren(result);
 
-                                     mPost.get(position).setLike(Integer.toString(like));
+                                     mPost.get(position).setLike(like);
                                      mAdapter.notifyDataSetChanged();
 
 
                                 }else {
+                                    databaselike.child(idlike).removeValue();
                                     Toast.makeText(getContext(),
-                                            "kamu sudah like untuk " + mPost.get(position).getJudul(), Toast.LENGTH_LONG).show();
+                                            "kamu dislike " + mPost.get(position).getJudul() , Toast.LENGTH_LONG).show();
+
+                                    HashMap<String, Object> result = new HashMap<>();
+
+                                    int like = mPost.get(position).getLike();
+                                    like--;
+                                    result.put("like", (like));
+                                    update.child(mPost.get(position).getId()).updateChildren(result);
+                                    mPost.get(position).setLike(like);
+
+                                    mLike.clear();
+                                    check = true;
+                                    mAdapter.notifyDataSetChanged();
                                 }
 
                             }

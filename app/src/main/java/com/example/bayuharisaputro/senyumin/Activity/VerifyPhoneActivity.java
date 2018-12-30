@@ -83,7 +83,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     }
                 });
     }
-
     private void sendVerificationCode(String number) {
         progressBar.setVisibility(View.VISIBLE);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
