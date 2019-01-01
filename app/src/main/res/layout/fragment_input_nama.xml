@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/smiling"
+    android:background="#FFFFFF"
     tools:context=".Fragment.InputNamaActivity">
 
     <!-- TODO: Update blank fragment layout -->
@@ -27,7 +27,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_alignLeft="@+id/nama" />
 
     <EditText
         android:id="@+id/tentang"
@@ -38,7 +39,8 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="tentang"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_alignLeft="@+id/nama" />
 
     <Button
         android:id="@+id/simpan"
