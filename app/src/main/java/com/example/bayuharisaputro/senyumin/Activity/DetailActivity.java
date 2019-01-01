@@ -109,13 +109,15 @@ public class DetailActivity extends AppCompatActivity {
 
                 }else {
                     komentar.setError( "Isi komentar kamu !" );
+
                 }
             }
         });
         query.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                mKomen.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Komen komen = postSnapshot.getValue(Komen.class);
                     mKomen.add(komen);
