@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#424242"
     android:id="@+id/postActivity"
     tools:context=".Activity.PostActivity"
     android:orientation="vertical"
     android:weightSum="2">
 
     <android.support.v7.widget.Toolbar
+        app:titleTextColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/toolbar"
@@ -45,7 +47,7 @@
 
             <Button
                 android:id="@+id/simpanPost"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/judul"
                 android:layout_centerHorizontal="true"
@@ -62,17 +64,22 @@
                 android:layout_below="@+id/gambar"
                 android:layout_alignParentStart="true"
                 android:ems="10"
+                android:textColor="#fff"
+                android:textColorHint="#ffff"
                 android:hint="Judul"
                 android:inputType="textPersonName"
                 android:layout_alignParentLeft="true" />
 
             <EditText
+                android:textColorHint="#ffff"
                 android:id="@+id/tanggal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/judul"
                 android:layout_alignParentStart="true"
                 android:ems="10"
+                android:textColor="#fff"
+                android:enabled="false"
                 android:hint="Tanggal"
                 android:inputType="date"
                 android:layout_alignParentLeft="true" />

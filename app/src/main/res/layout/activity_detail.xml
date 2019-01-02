@@ -3,8 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/detailActivity"
+    android:theme="@style/AppTheme.AppBarOverlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#424242"
     android:weightSum="2"
     tools:context=".Activity.DetailActivity">
 
@@ -50,7 +52,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Judul"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
         </RelativeLayout>
 
@@ -77,6 +79,8 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:layout_margin="5dp"
+            android:background="#424242"
             android:id="@+id/like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,19 +91,20 @@
             android:id="@+id/jumlahLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="6dp"
             android:text="jumlah like"
             android:textSize="12dp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:id="@+id/jumlahKomentar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
             android:text="jumlah komentar"
             android:textSize="12dp"
+            android:textColor="#ffff"
             android:textStyle="bold|italic" />
 
 
@@ -109,8 +114,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_komen"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/linear2"/>
+        android:layout_height="150dp"
+        android:layout_below="@id/linear2"
+        />
 
     <RelativeLayout
         android:layout_below="@id/recycler_view_komen"
@@ -124,6 +130,8 @@
         <EditText
 
             android:id="@+id/komentar"
+            android:textColor="#ffff"
+            android:textColorHint="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Comment Kamu" />
@@ -134,7 +142,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:text="Submit" />
+            android:background="@color/colorPrimary"
+            android:text="Submit"
+            android:textColor="#fff"/>
     </RelativeLayout>
     </RelativeLayout>
     </ScrollView>

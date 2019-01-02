@@ -170,7 +170,7 @@ public class PostActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.back:
-                Intent myIntent = new Intent(PostActivity.this, MainActivity.class);
+                Intent myIntent = new Intent(PostActivity.this, Main2Activity.class);
                 startActivity(myIntent);
                 finish();
                 break;

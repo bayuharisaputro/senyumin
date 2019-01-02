@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.bayuharisaputro.senyumin.Activity.DetailActivity;
@@ -37,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class PostKamu extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     int jumlah = 0;
     RecyclerView mRecyclerView;
     RecyclerAdapter mAdapter;
@@ -46,14 +45,15 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
     int LikeStat = 0;
     DatabaseReference databaselike;
     List<Post> mPost;
+    List<Post> mPost2;
     List<Like> mLike;
     String idlike;
     boolean check = true;
 
-    Hot.OnFragmentInteractionListener mListener;
+    PostKamu.OnFragmentInteractionListener mListener;
     SwipeRefreshLayout mSwipeRefreshLayout;
     String nomor = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
-    public Hot() {
+    public PostKamu() {
         // Required empty public constructor
     }
 
@@ -69,6 +69,7 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
         databaselike = FirebaseDatabase.getInstance().getReference("Like");
 
         mPost = new ArrayList<>();
+        mPost2 = new ArrayList<>();
         mLike = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("Post");
         ref2 = FirebaseDatabase.getInstance().getReference("Like");
@@ -93,8 +94,8 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Hot.OnFragmentInteractionListener) {
-            mListener = (Hot.OnFragmentInteractionListener) context;
+        if (context instanceof PostKamu.OnFragmentInteractionListener) {
+            mListener = (PostKamu.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -109,6 +110,7 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
 
     @Override
     public void onRefresh() {
+        mPost2.clear();
         mPost.clear();
         loadData();
     }
@@ -130,6 +132,12 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
 
                 }
 
+                for (int i = 0; i < mPost.size(); i++) {
+                    if (mPost.get(i).getNomor().equals(nomor) ){
+                        mPost2.add(mPost.get(i));
+                    }
+                }
+
                 query2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -138,12 +146,8 @@ public class Hot extends Fragment implements SwipeRefreshLayout.OnRefreshListene
                             mLike.add(uLike);
 
                         }
-                        Collections.sort(mPost, new Comparator< Post >() {
-                            @Override public int compare(Post p1, Post p2) {
-                                return p2.getLike()- p1.getLike();
-                            }
-                        });
-                        mAdapter = new RecyclerAdapter(getActivity(), mPost);
+                        Collections.reverse(mPost2);
+                        mAdapter = new RecyclerAdapter(getActivity(), mPost2);
                         mSwipeRefreshLayout.setRefreshing(false);
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.setOnItemClickListener(new RecyclerClick() {

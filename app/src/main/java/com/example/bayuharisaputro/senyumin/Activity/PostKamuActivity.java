@@ -4,28 +4,29 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.bayuharisaputro.senyumin.Adapter.PagerAdapter;
+import com.example.bayuharisaputro.senyumin.Adapter.PagerAdapter2;
 import com.example.bayuharisaputro.senyumin.Fragment.Hot;
 import com.example.bayuharisaputro.senyumin.Fragment.Main;
+import com.example.bayuharisaputro.senyumin.Fragment.PostKamu;
 import com.example.bayuharisaputro.senyumin.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,Main.OnFragmentInteractionListener,Hot.OnFragmentInteractionListener {
+public class PostKamuActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,PostKamu.OnFragmentInteractionListener,Main.OnFragmentInteractionListener,Hot.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class Main2Activity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Main2Activity.this, PostActivity.class);
+                Intent myIntent = new Intent(PostKamuActivity.this, PostActivity.class);
                 startActivity(myIntent);
                 finish();
             }
@@ -58,11 +59,10 @@ public class Main2Activity extends AppCompatActivity
         nama.setText(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber());
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Baru"));
-        tabLayout.addTab(tabLayout.newTab().setText("Trending"));
+        tabLayout.addTab(tabLayout.newTab().setText("Post Kamu"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final PagerAdapter2 adapter = new PagerAdapter2(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -121,19 +121,26 @@ public class Main2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent myIntent = new Intent(Main2Activity.this, Main2Activity.class);
+            Intent myIntent = new Intent(PostKamuActivity.this, Main2Activity.class);
             startActivity(myIntent);
             finish();
         } else if (id == R.id.nav_gallery) {
+            Intent myIntent = new Intent(PostKamuActivity.this, PostKamuActivity.class);
+            startActivity(myIntent);
+
 
         } else if (id == R.id.nav_manage) {
-
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(PostKamuActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     @Override
     public void onFragmentInteraction(Uri uri) {
